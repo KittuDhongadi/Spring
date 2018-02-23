@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<!--
+	//setter and getter injection for 2 member variables
+<beans>
+    <bean name="triangle" class="org.kishan.Triangle">
+    <property name="type" value="equi"/>
+    <property name="height" value="20"/>
+    </bean>
+</beans>
+  --> 
+
+<!--
+	constructor injection
+<beans>
+    <bean id="triangle" class="org.kishan.Triangle">
+    <constructor-arg  value="Equilateral"/>
+    <constructor-arg  value="20"/>
+    </bean>
+</beans>
+ -->
+
+<!-- 
+    <beans>
+        <bean id="triangle" class="org.kishan.Triangle">
+            <property name="pointa" ref="Zero"/>
+            <property name="pointb" ref="One"/>
+            <property name="pointc" ref="Two"/>
+        </bean>
+        <bean id="Zero" class="org.kishan.Point">
+            <property name="x" value="0"/>
+            <property name="y" value="0"/>
+		</bean>     
+		<bean id="One" class="org.kishan.Point">
+            <property name="x" value="-20"/>
+            <property name="y" value="0"/>
+		</bean>  
+		<bean id="Two" class="org.kishan.Point">
+            <property name="x" value="20"/>
+            <property name="y" value="0"/>
+		</bean>     
+    </beans>
+  -->
+    
+    <!-- 
+   nested creation Inner bean 
+    <beans>
+        <bean id="triangle" class="org.kishan.Triangle">
+            <property name="pointa" ref="Zero"/>
+            
+            <property name="pointb">
+            <bean id="One" class="org.kishan.Point">
+            <property name="x" value="-20"/>
+            <property name="y" value="0"/>
+        	</bean>
+        	</property>
+        	
+            <property name="pointc">
+            <bean id="Two" class="org.kishan.Point">
+            <property name="x" value="20"/>
+            <property name="y" value="0"/>
+         	</bean>
+         	</property>
+         </bean>
+        
+         //aliasing
+         <alias name="triangle" alias="triangle-alias"/>
+         
+        <bean id="Zero" class="org.kishan.Point">
+            <property name="x" value="0"/>
+            <property name="y" value="0"/>
+        </bean>
+    </beans>
+ -->
+ 
+ <!-- 
+  <beans>
+        <bean id="triangle" class="org.kishan.Triangle">
+            <property name="points">
+                <list>
+                    <ref bean="Zero"/>
+                    <ref bean="One"/>
+                    <ref bean="Two"/>
+                </list>
+            </property>
+        </bean>
+        <bean id="Zero" class="org.kishan.Point">
+            <property name="x" value="0"/>
+            <property name="y" value="0"/>
+		</bean>     
+		<bean id="One" class="org.kishan.Point">
+            <property name="x" value="-20"/>
+            <property name="y" value="0"/>
+		</bean>  
+		<bean id="Two" class="org.kishan.Point">
+            <property name="x" value="20"/>
+            <property name="y" value="0"/>
+		</bean>     
+    </beans>
+ -->
+ 
+ <!-- 
+ <beans>
+     <bean id="triangle" class="org.kishan.Triangle" autowire="constructor">
+         
+     </bean>
+     <bean id="pointa" class="org.kishan.Point">
+         <property name="x" value="0"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointb" class="org.kishan.Point">
+         <property name="x" value="-20"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointc" class="org.kishan.Point">
+         <property name="x" value="20"/>
+         <property name="y" value="0"/>
+     </bean>
+ </beans>
+  -->
+  
+  <!--  
+  {try for autowire with constructor 10th video
+  <beans>
+      <bean id="triangle" class="org.kishan.Triangle">
+          <constructor-arg  value="er"/>
+          <constructor-arg value="er"/>
+      </bean>
+  </beans>
+ -->
+ <!-- 
+  <beans>
+     <bean id="triangle" class="org.kishan.Triangle">
+         <property name="pointa" ref="pointa"/>
+         <property name="pointb" ref="pointb"/>
+         <property name="pointc" ref="pointc"/>
+     </bean>
+     
+     <bean id="pointa" class="org.kishan.Point">
+         <property name="x" value="0"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointb" class="org.kishan.Point">
+         <property name="x" value="-20"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointc" class="org.kishan.Point">
+         <property name="x" value="20"/>
+         <property name="y" value="0"/>
+     </bean>
+ </beans>
+  -->
+  <!-- 
+   <beans>
+       <bean id="parentTriangle" class="org.kishan.Triangle">
+           <property name="pointa" ref="pointa"/>
+       </bean>
+     <bean id="triangle1" class="org.kishan.Triangle" parent="parentTriangle">
+         <property name="pointb" ref="pointb"/>
+         <property name="pointc" ref="pointc"/>
+     </bean>
+     
+     <bean id="triangle2" class="org.kishan.Triangle" parent="parentTriangle">
+           <property name="pointb" ref="pointb"/>
+     </bean>
+       
+     <bean id="pointa" class="org.kishan.Point">
+         <property name="x" value="0"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointb" class="org.kishan.Point">
+         <property name="x" value="-20"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointc" class="org.kishan.Point">
+         <property name="x" value="20"/>
+         <property name="y" value="0"/>
+     </bean>
+ </beans>
+  -->
+  
+  
+ <!-- 
+ 13th videoo with List
+ <beans>
+       <bean id="parentTriangle" class="org.kishan.Triangle" abstract="true">
+           <property name="points">  
+               <list>
+                   <ref bean="pointa"/> 
+               </list>
+               </property>
+       </bean>
+     <bean id="triangle1" class="org.kishan.Triangle" parent="parentTriangle">
+         <property name="points">  
+               <list merge="true" >
+                   <ref bean="pointb"/> 
+               </list>
+               </property>
+     </bean>
+     
+     <bean id="triangle2" class="org.kishan.Triangle" parent="parentTriangle">
+           <property name="points" ref="pointb"/>
+     </bean>
+       
+     <bean id="pointa" class="org.kishan.Point">
+         <property name="x" value="0"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointb" class="org.kishan.Point">
+         <property name="x" value="-20"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointc" class="org.kishan.Point">
+         <property name="x" value="20"/>
+         <property name="y" value="0"/>
+     </bean>
+ </beans>
+  -->
+  
+  <!-- 
+  <beans>
+       <bean id="parentTriangle" class="org.kishan.Triangle">
+           <property name="pointa" ref="pointa"/>
+       </bean>
+     <bean id="triangle1" class="org.kishan.Triangle" parent="parentTriangle">
+         <property name="pointb" ref="pointb"/>
+         <property name="pointc" ref="pointc"/>
+     </bean>
+     
+     <bean id="triangle2" class="org.kishan.Triangle" parent="parentTriangle">
+           <property name="pointb" ref="pointb"/>
+     </bean>
+       
+     <bean id="pointa" class="org.kishan.Point">
+         <property name="x" value="0"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointb" class="org.kishan.Point">
+         <property name="x" value="-20"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointc" class="org.kishan.Point">
+         <property name="x" value="20"/>
+         <property name="y" value="0"/>
+     </bean>
+ </beans> -->
+ 
+ 
+ <!-- 
+ <beans default-init-method="myInit" default-destroy-method="cleanUp">
+  <bean id="triangle" class="org.kishan.Triangle" autowire="byName">
+   -->
+   <!-- 
+    <beans>
+  <bean id="triangle" class="org.kishan.Triangle" autowire="byName" init-method="myInit" destroy-method="cleanUp">
+     </bean>
+     <bean id="pointa" class="org.kishan.Point">
+         <property name="x" value="0"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointb" class="org.kishan.Point">
+         <property name="x" value="-20"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointc" class="org.kishan.Point">
+         <property name="x" value="20"/>
+         <property name="y" value="0"/>
+     </bean>
+ </beans>
+  -->
+  
+  <!-- 
+   <beans>
+     <bean id="triangle" class="org.kishan.Triangle">
+         <property name="pointa" ref="pointa"/>
+         <property name="pointb" ref="pointb"/>
+         <property name="pointc" ref="pointc"/>
+     </bean>
+     
+     <bean id="pointa" class="org.kishan.Point">
+         <property name="x" value="0"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointb" class="org.kishan.Point">
+         <property name="x" value="-20"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointc" class="org.kishan.Point">
+         <property name="x" value="20"/>
+         <property name="y" value="0"/>
+     </bean>
+     
+     <bean class="org.kishan.DisplayNameBeanPostProcessor"/>
+ </beans>
+ -->
+ 
+  
+  <beans>
+     <bean id="triangle" class="org.kishan.Triangle">
+         <property name="pointa" ref="pointa"/>
+         <property name="pointb" ref="pointb"/>
+         <property name="pointc" ref="pointc"/>
+     </bean>
+     
+     <bean id="pointa" class="org.kishan.Point">
+         <property name="x" value="0" />
+         <property name="y" value="0" />
+     </bean>
+     <bean id="pointb" class="org.kishan.Point">
+         <property name="x" value="-20"/>
+         <property name="y" value="0"/>
+     </bean>
+     <bean id="pointc" class="org.kishan.Point">
+         <property name="x" value="20"/>
+         <property name="y" value="0"/>
+     </bean>
+
+     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+         <property name="locations" value="pointsconfig.properties"/>
+         </bean>
+ </beans>
